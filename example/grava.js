@@ -1,4 +1,4 @@
-var loteriasCaixaJson = require('./../index');
+var loteriasCaixaJson = require('../index');
 var path = require('path');
 const db = require('../config/database')
 const { asyncForEach } = require('../lib/util');
@@ -17,8 +17,15 @@ async function mega () {
 
 const start = async () => {
   const arrayConcursoMega = await mega()
+  await gravaMegaSena(arrayConcursoMega);
+  process.exit()
+}
+
+start()
+
+async function gravaMegaSena (arrayConcursoMega) {
   await asyncForEach(arrayConcursoMega, async (concursoMega) => {
-    let dbconcurso = await db('megasena').where('concurso', concursoMega.Concurso)
+    let dbconcurso = await db('megasena').where('concurso', concursoMega.Concurso);
     if (dbconcurso.length === 0) {
       await db('megasena').insert({
         concurso: concursoMega.Concurso,
@@ -40,36 +47,34 @@ const start = async () => {
         Valor_Acumulado: concursoMega.Valor_Acumulado,
         Estimativa_Premio: concursoMega.Estimativa_Premio,
         Acumulado_Mega_da_Virada: concursoMega.Acumulado_Mega_da_Virada,
-      })
-
-      let index = 0
-      let idCidade = 0
+      });
+      let index = 0;
+      let idCidade = 0;
       await asyncForEach(concursoMega.Cidade, async (cidade) => {
-        index = index + 1
+        index = index + 1;
         if (cidade != null && cidade != '') {
-          let dbcidade = await db('cidade').where('cidade', cidade)
+          let dbcidade = await db('cidade').where('cidade', cidade);
           if (dbcidade.length === 0) {
             dbcidade = await db('cidade').insert({
               cidade: cidade,
               uf: concursoMega.UF[index - 1]
-            })
-            idCidade = dbcidade[0]
+            });
+            idCidade = dbcidade[0];
           }
           else {
-            idCidade = dbcidade[0].id
+            idCidade = dbcidade[0].id;
           }
-
           let dbconcursocidade = await db('cidade_ganhadora')
             .where('id_cidade', idCidade)
             .andWhere('id_concurso', concursoMega.Concurso)
-            .andWhere('tipo_concurso', 'MEGASENA')
+            .andWhere('tipo_concurso', 'MEGASENA');
           if (dbconcursocidade.length === 0) {
             await db('cidade_ganhadora').insert({
               id_cidade: idCidade,
               id_concurso: concursoMega.Concurso,
               tipo_concurso: 'MEGASENA',
               qtd: 1
-            })
+            });
           }
           else {
             await db('cidade_ganhadora')
@@ -78,18 +83,13 @@ const start = async () => {
               .andWhere('tipo_concurso', 'MEGASENA')
               .increment({
                 qtd: 1
-              })
+              });
           }
         }
-      })
+      });
     }
-  })
-  process.exit()
+  });
 }
-
-start()
-
-
 // Loto Fácil
 /* loteriasCaixaJson.lotoFacil(diretorioTemporario)
   .then((jsonArray) => {
