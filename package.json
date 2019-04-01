@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dennnisk/loterias-caixa-json.git"
+    "url": "git+https://github.com/edutomazini/sortenavida"
   },
   "keywords": [
     "loterias",
@@ -18,12 +18,6 @@
     "parser",
     "scrab"
   ],
-  "author": "Dennnis.k <dennnis.projects@gmail.com> (https://github.com/dennnisk)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/dennnisk/loterias-caixa-json/issues"
-  },
-  "homepage": "https://github.com/dennnisk/loterias-caixa-json#readme",
   "dependencies": {
     "adm-zip": "^0.4.7",
     "cheerio": "^1.0.0-rc.2",
