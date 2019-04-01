@@ -2,7 +2,7 @@
   "name": "loterias-caixa-json",
   "version": "1.0.2",
   "description": "Módulo feito em node.js para obter o resultado das loterias da caixa e devolver um JSON com todos os dados",
-  "main": "example/example.js",
+  "main": "example/grava.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
