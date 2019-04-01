@@ -6,7 +6,7 @@ const { asyncForEach } = require('../lib/util');
 let diretorioTemporario = path.join('temp');
 
 // Mega sena
-async function mega () {
+ mega = async () => {
   return await loteriasCaixaJson.megaSena(diretorioTemporario)
     .then((jsonArray) => {
       return jsonArray
@@ -27,6 +27,7 @@ async function gravaMegaSena (arrayConcursoMega) {
   await asyncForEach(arrayConcursoMega, async (concursoMega) => {
     let dbconcurso = await db('megasena').where('concurso', concursoMega.Concurso);
     if (dbconcurso.length === 0) {
+      console.log('inserindo concurso ' + concursoMega.Concurso)
       await db('megasena').insert({
         concurso: concursoMega.Concurso,
         DataSorteio: concursoMega.DataSorteio,
