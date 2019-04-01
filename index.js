@@ -1,23 +1,20 @@
-var path = require('path');
+const path = require('path');
+const libMegaSena = require('./lib/mega-sena')
+const libLotoFacil = require('./lib/loto-facil');
 
 
+const megaSena = async (tempDirectory) => {
+  return libMegaSena.downloadResultadosMegaSena(path.normalize(tempDirectory))
+    .then((nomeArquivoComResultados) => {
+      return libMegaSena.htmlToJson(nomeArquivoComResultados);
+    })
+};
 
-exports.megaSena = await function(tempDirectory) {
-  let megaSena = require('./lib/mega-sena');
-
-  return megaSena.downloadResultadosMegaSena(path.normalize(tempDirectory))
-    .then(function(nomeArquivoComResultados) {
-      return megaSena.htmlToJson(nomeArquivoComResultados);
+const lotoFacil = (tempDirectory) => {
+  return libLotoFacil.downloadResultadosLotoFacil(path.normalize(tempDirectory))
+    .then((nomeArquivoComResultados) => {
+      return libLotoFacil.htmlToJson(nomeArquivoComResultados);
     });
 };
 
-
-
-exports.lotoFacil = function(tempDirectory) {
-  let lotoFacil = require('./lib/loto-facil');
-
-  return lotoFacil.downloadResultadosLotoFacil(path.normalize(tempDirectory))
-    .then(function(nomeArquivoComResultados) {
-      return lotoFacil.htmlToJson(nomeArquivoComResultados);
-    });
-};
+module.exports = { megaSena, lotoFacil }
