@@ -2,7 +2,6 @@
 exports.up = function (knex, Promise) {
   return knex.schema.createTable('cidade_ganhadora', table => {
     table.increments('id').primary()
-    table.timestamps(true, true)
     table.integer('id_cidade').unsigned()
     table.integer('id_concurso').unsigned()
     table.integer('qtd').unsigned()
