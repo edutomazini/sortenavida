@@ -2,9 +2,10 @@
   "name": "loterias-caixa-json",
   "version": "1.0.2",
   "description": "Módulo feito em node.js para obter o resultado das loterias da caixa e devolver um JSON com todos os dados",
-  "main": "app/grava.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,9 @@
   "dependencies": {
     "adm-zip": "^0.4.7",
     "cheerio": "^1.0.0-rc.2",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
     "knex": "^0.16.3",
     "moment": "^2.24.0",
     "mysql": "^2.16.0",
