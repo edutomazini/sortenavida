@@ -1,12 +1,13 @@
 var loteriasCaixaJson = require('../index');
-const path = require('path');
-const fs = require('fs')
+var path = require('path');
 const db = require('../config/database')
 const { asyncForEach } = require('../lib/util');
 
+let diretorioTemporario = path.join('temp');
+
 // Mega sena
  mega = async () => {
-  return await loteriasCaixaJson.megaSena('./')
+  return await loteriasCaixaJson.megaSena(diretorioTemporario)
     .then((jsonArray) => {
       return jsonArray
     }).catch((err) => {
@@ -22,8 +23,10 @@ const start = async () => {
 
 start()
 
+
 async function gravaMegaSena (arrayConcursoMega) {
   await asyncForEach(arrayConcursoMega, async (concursoMega) => {
+    //console.log(concursoMega)
     let dbconcurso = await db('megasena').where('concurso', concursoMega.Concurso);
     if (dbconcurso.length === 0) {
       console.log('inserindo concurso ' + concursoMega.Concurso)
