@@ -1,9 +1,17 @@
 var loteriasCaixaJson = require('../index');
-var path = require('path');
+const path = require('path');
 const db = require('../config/database')
 const { asyncForEach } = require('../lib/util');
 
 let diretorioTemporario = path.join('temp');
+
+const dirtemp = path.join(`${__dirname}/`, 'temp')
+if (!fs.existsSync(dirtemp)) {
+  fs.mkdirSync(dirtemp, 0744);
+}
+
+console.log('temp ' + dirtemp)
+console.log(diretorioTemporario)
 
 // Mega sena
  mega = async () => {
