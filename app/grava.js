@@ -6,9 +6,10 @@ const { asyncForEach } = require('../lib/util');
 
 let diretorioTemporario = path.join('temp');
 
-const dirtemp = path.join(`${__dirname}/`, 'temp')
+const dirtemp = path.join(`${__dirname}/`, '../temp')
 if (!fs.existsSync(dirtemp)) {
   fs.mkdirSync(dirtemp, 0744);
+  fs.mkdirSync(dirtemp+'/D_megase', 0744);
 }
 
 console.log('temp ' + dirtemp)
