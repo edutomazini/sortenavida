@@ -1,5 +1,6 @@
 var loteriasCaixaJson = require('../index');
 const path = require('path');
+const fs = require('fs')
 const db = require('../config/database')
 const { asyncForEach } = require('../lib/util');
 
