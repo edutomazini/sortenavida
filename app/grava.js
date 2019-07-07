@@ -4,7 +4,7 @@ const fs = require('fs')
 const db = require('../config/database')
 const { asyncForEach } = require('../lib/util');
 
-let diretorioTemporario = path.join('temp');
+//let diretorioTemporario = path.join('temp');
 
 const dirtemp = path.join(`${__dirname}/`, '../temp')
 if (!fs.existsSync(dirtemp)) {
@@ -13,11 +13,11 @@ if (!fs.existsSync(dirtemp)) {
 }
 
 console.log('temp ' + dirtemp)
-console.log(diretorioTemporario)
+console.log(dirtemp)
 
 // Mega sena
  mega = async () => {
-  return await loteriasCaixaJson.megaSena(diretorioTemporario)
+  return await loteriasCaixaJson.megaSena(dirtemp)
     .then((jsonArray) => {
       return jsonArray
     }).catch((err) => {
